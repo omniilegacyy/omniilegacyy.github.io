@@ -150,3 +150,19 @@ linear-gradient(90deg,#090b0f 0%,#080b10 23%,#08101a 44%,#101014 67%,#090b0f 100
   display:none!important;
   background:none!important;
 }
+
+
+/* Omnii signature in hero card */
+.omnii-mark{
+  position:absolute;
+  top:72px;
+  left:38px;
+  z-index:2;
+  font-family:Orbitron,sans-serif;
+  font-size:32px;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:.12em;
+  color:#f04b35;
+  text-transform:uppercase;
+}
