@@ -137,3 +137,16 @@ linear-gradient(90deg,#090b0f 0%,#080b10 23%,#08101a 44%,#101014 67%,#090b0f 100
 /* Clean black Civic Si project hero */
 .civic-hero{background:#080a0d!important}
 .civic-hero:after{display:none!important}
+
+
+/* Final Civic hero cleanup: remove all decorative SI layers */
+.project-page .civic-hero{
+  background:#080a0d!important;
+  background-image:none!important;
+}
+.project-page .civic-hero::before,
+.project-page .civic-hero::after{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+}
