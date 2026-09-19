@@ -42,7 +42,44 @@ linear-gradient(90deg,#090b0f 0%,#080b10 23%,#08101a 44%,#101014 67%,#090b0f 100
 .hero-art{background-color:transparent!important;opacity:1!important;filter:none!important;mask-image:none!important;-webkit-mask-image:none!important;box-shadow:none!important;background-size:contain!important;background-repeat:no-repeat!important;background-position:center!important}
 
 
-/* Hero artwork 2x size test */
+/* Cinematic full-width hero artwork test */
 @media(min-width:1101px){
-.hero-art{background-size:200% auto!important;}
+.hero{
+  grid-template-columns:minmax(430px,.95fr) minmax(300px,.62fr);
+  gap:3vw;
+  padding-left:5vw;
+  padding-right:5vw;
+  isolation:isolate;
+}
+.hero-art{
+  position:absolute!important;
+  z-index:0!important;
+  inset:4% 14% 4% 25%!important;
+  min-height:0!important;
+  background-size:contain!important;
+  background-repeat:no-repeat!important;
+  background-position:center!important;
+  opacity:.72!important;
+  pointer-events:none;
+  mask-image:linear-gradient(to right,transparent 0,#000 12%,#000 88%,transparent 100%)!important;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 12%,#000 88%,transparent 100%)!important;
+}
+.hero-copy{
+  grid-column:1;
+  z-index:2!important;
+  text-shadow:0 2px 20px #080a0d;
+}
+.hero-card{
+  grid-column:2;
+  justify-self:end;
+  z-index:2!important;
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(90deg,rgba(8,10,13,.98) 0%,rgba(8,10,13,.88) 18%,rgba(8,10,13,.25) 38%,rgba(8,10,13,.08) 67%,rgba(8,10,13,.7) 88%,rgba(8,10,13,.96) 100%);
+}
 }
