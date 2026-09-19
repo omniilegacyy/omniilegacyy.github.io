@@ -83,3 +83,21 @@ linear-gradient(90deg,#090b0f 0%,#080b10 23%,#08101a 44%,#101014 67%,#090b0f 100
   background:linear-gradient(90deg,rgba(8,10,13,.98) 0%,rgba(8,10,13,.88) 18%,rgba(8,10,13,.25) 38%,rgba(8,10,13,.08) 67%,rgba(8,10,13,.7) 88%,rgba(8,10,13,.96) 100%);
 }
 }
+
+
+/* Cinematic hero v2 - broad transparent backdrop */
+@media(min-width:1101px){
+.hero-art{
+  inset:-2% 4% -2% 12%!important;
+  background-size:contain!important;
+  background-position:center!important;
+  opacity:.52!important;
+  mask-image:radial-gradient(ellipse 82% 70% at 55% 50%,#000 35%,rgba(0,0,0,.92) 52%,rgba(0,0,0,.55) 70%,transparent 100%)!important;
+  -webkit-mask-image:radial-gradient(ellipse 82% 70% at 55% 50%,#000 35%,rgba(0,0,0,.92) 52%,rgba(0,0,0,.55) 70%,transparent 100%)!important;
+}
+.hero:after{
+  background:linear-gradient(90deg,rgba(8,10,13,.96) 0%,rgba(8,10,13,.72) 19%,rgba(8,10,13,.16) 38%,rgba(8,10,13,.04) 65%,rgba(8,10,13,.38) 84%,rgba(8,10,13,.88) 100%)!important;
+}
+.hero-copy{z-index:3!important}
+.hero-card{z-index:3!important;background:linear-gradient(145deg,rgba(20,25,32,.88),rgba(11,13,17,.88))!important;backdrop-filter:blur(3px)}
+}
