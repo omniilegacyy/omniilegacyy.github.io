@@ -35,3 +35,8 @@ linear-gradient(90deg,#090b0f 0%,#080b10 23%,#08101a 44%,#101014 67%,#090b0f 100
 .hero{background:#080a0d!important}
 .hero:before{background:none!important}
 .hero-art{background-color:#080a0d!important;filter:saturate(.95) contrast(1.03) brightness(.92);mask-image:linear-gradient(to right,transparent 0,#000 7%,#000 93%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0,#000 7%,#000 93%,transparent 100%)}
+
+/* Clean presentation for background-matched final artwork */
+.hero{background:#080a0d!important}
+.hero:before{display:none!important}
+.hero-art{background-color:transparent!important;opacity:1!important;filter:none!important;mask-image:none!important;-webkit-mask-image:none!important;box-shadow:none!important;background-size:contain!important;background-repeat:no-repeat!important;background-position:center!important}
