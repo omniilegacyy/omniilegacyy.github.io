@@ -17,3 +17,8 @@
 .hero-art{min-height:500px;background-size:contain;background-repeat:no-repeat;background-position:center;opacity:.9;mask-image:linear-gradient(to right,transparent 0,#000 5%,#000 95%,transparent 100%);box-shadow:none}
 .hero-card{max-width:340px;height:430px}
 }
+
+/* Seamless hero artwork blend */
+.hero-art{background-color:#090b0f;mask-image:radial-gradient(ellipse 88% 78% at center,#000 54%,rgba(0,0,0,.96) 65%,rgba(0,0,0,.68) 78%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 88% 78% at center,#000 54%,rgba(0,0,0,.96) 65%,rgba(0,0,0,.68) 78%,transparent 100%);filter:saturate(.92) contrast(1.04) brightness(.9)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 48% 50% at 55% 50%,rgba(19,28,42,.18),transparent 72%);z-index:0}
+@media(max-width:1100px){.hero-art{mask-image:radial-gradient(ellipse 90% 80% at center,#000 48%,rgba(0,0,0,.7) 75%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 90% 80% at center,#000 48%,rgba(0,0,0,.7) 75%,transparent 100%)}}
