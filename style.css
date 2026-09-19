@@ -40,3 +40,9 @@ linear-gradient(90deg,#090b0f 0%,#080b10 23%,#08101a 44%,#101014 67%,#090b0f 100
 .hero{background:#080a0d!important}
 .hero:before{display:none!important}
 .hero-art{background-color:transparent!important;opacity:1!important;filter:none!important;mask-image:none!important;-webkit-mask-image:none!important;box-shadow:none!important;background-size:contain!important;background-repeat:no-repeat!important;background-position:center!important}
+
+
+/* Hero artwork 2x size test */
+@media(min-width:1101px){
+.hero-art{background-size:200% auto!important;}
+}
