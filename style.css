@@ -22,3 +22,11 @@
 .hero-art{background-color:#090b0f;mask-image:radial-gradient(ellipse 88% 78% at center,#000 54%,rgba(0,0,0,.96) 65%,rgba(0,0,0,.68) 78%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 88% 78% at center,#000 54%,rgba(0,0,0,.96) 65%,rgba(0,0,0,.68) 78%,transparent 100%);filter:saturate(.92) contrast(1.04) brightness(.9)}
 .hero:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 48% 50% at 55% 50%,rgba(19,28,42,.18),transparent 72%);z-index:0}
 @media(max-width:1100px){.hero-art{mask-image:radial-gradient(ellipse 90% 80% at center,#000 48%,rgba(0,0,0,.7) 75%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 90% 80% at center,#000 48%,rgba(0,0,0,.7) 75%,transparent 100%)}}
+
+/* Landing-page atmosphere sampled from hero artwork */
+.hero{background:
+radial-gradient(ellipse 36% 55% at 43% 51%,rgba(12,45,83,.34),transparent 76%),
+radial-gradient(ellipse 34% 52% at 67% 50%,rgba(104,46,24,.20),transparent 76%),
+linear-gradient(90deg,#090b0f 0%,#080b10 23%,#08101a 44%,#101014 67%,#090b0f 100%)}
+.hero:before{inset:0;background:linear-gradient(180deg,rgba(9,11,15,.98) 0%,transparent 22%,transparent 76%,rgba(9,11,15,.98) 100%);z-index:0}
+.hero-art{background-color:transparent;filter:saturate(.95) contrast(1.04) brightness(.92);mask-image:radial-gradient(ellipse 96% 86% at center,#000 60%,rgba(0,0,0,.9) 74%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 96% 86% at center,#000 60%,rgba(0,0,0,.9) 74%,transparent 100%)}
