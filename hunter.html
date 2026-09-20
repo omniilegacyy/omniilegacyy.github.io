@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Omnii Legacyy's current Destiny 2 Hunter loadout."><title>Hunter Loadout | Omnii Legacyy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head>
+<body class="destiny-page hunter-loadout-page"><header class="nav"><a class="logo" href="index.html">GAME<span>&</span>GARAGE</a><nav><a href="destiny.html">← Guardian Profile</a><a href="index.html">Home</a></nav></header>
+<main><section class="section hunter-loadout">
+<div class="section-head"><div><p class="eyebrow">DESTINY 2 / CURRENT LOADOUT</p><h2>Hunter.</h2><p class="destiny-handle">OMNII LEGACYY#6405</p></div><p id="hunter-status">Connecting to Guardian data...</p></div>
+<div class="hunter-profile-strip"><div><span>CLASS</span><strong>HUNTER</strong></div><div><span>POWER</span><strong id="hunter-power">—</strong></div><div><span>PLAYTIME</span><strong id="hunter-time">—</strong></div><div><span>LAST ACTIVE</span><strong id="hunter-last">—</strong></div></div>
+<div class="loadout-section-title"><span>01</span><h3>WEAPONS</h3></div><div id="hunter-weapons" class="loadout-slots"><article><span>KINETIC / PRIMARY</span><strong>Live item connection pending</strong></article><article><span>ENERGY / SECONDARY</span><strong>Live item connection pending</strong></article><article><span>POWER</span><strong>Live item connection pending</strong></article></div>
+<div class="loadout-section-title"><span>02</span><h3>ARMOR</h3></div><div id="hunter-armor" class="loadout-slots armor-slots"><article><span>HELMET</span><strong>Live item connection pending</strong></article><article><span>GAUNTLETS</span><strong>Live item connection pending</strong></article><article><span>CHEST</span><strong>Live item connection pending</strong></article><article><span>LEGS</span><strong>Live item connection pending</strong></article><article><span>CLASS ITEM</span><strong>Live item connection pending</strong></article></div>
+<p class="loadout-note">The Hunter identity and character stats are live now. Equipped weapon and armor names will populate here once the secure Bungie equipment endpoint is added.</p>
+</section></main><footer><div class="logo">GAME<span>&</span>GARAGE</div><p>Omnii Legacyy • Hunter Loadout</p></footer>
+<script>
+const API="https://shabas-world-destiny-api.shabalondon0z.workers.dev";
+function hours(m){return Math.floor(Number(m||0)/60).toLocaleString()+" hrs"}
+async function loadHunter(){
+ try{
+  const r=await fetch(API+"/guardian"); if(!r.ok) throw new Error(r.status); const d=await r.json();
+  const h=(d.characters||[]).find(c=>c.classType===1); if(!h) throw new Error("Hunter not found");
+  document.getElementById("hunter-power").textContent=Number(h.power||0).toLocaleString();
+  document.getElementById("hunter-time").textContent=hours(h.minutesPlayedTotal);
+  document.getElementById("hunter-last").textContent=h.lastPlayed?new Date(h.lastPlayed).toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"}):"—";
+  document.getElementById("hunter-status").textContent="Live Hunter data • Updated when this page loads";
+  try{
+   const lr=await fetch(API+"/loadout?class=Hunter");
+   if(lr.ok){const ld=await lr.json(); if(ld.status==="online"&&ld.items) renderLoadout(ld.items);}
+  }catch(e){}
+ }catch(e){document.getElementById("hunter-status").textContent="Hunter data temporarily unavailable."}
+}
+function renderLoadout(items){
+ const weapons=(items||[]).filter(x=>x.category==="weapon"), armor=(items||[]).filter(x=>x.category==="armor");
+ const card=x=>'<article><span>'+String(x.slot||"EQUIPPED").toUpperCase()+'</span>'+(x.icon?'<img src="https://www.bungie.net'+x.icon+'" alt="">':'')+'<strong>'+x.name+'</strong>'+(x.power?'<small>POWER '+Number(x.power).toLocaleString()+'</small>':'')+'</article>';
+ if(weapons.length)document.getElementById("hunter-weapons").innerHTML=weapons.map(card).join("");
+ if(armor.length)document.getElementById("hunter-armor").innerHTML=armor.map(card).join("");
+ if(weapons.length||armor.length)document.querySelector(".loadout-note").textContent="Current equipped Hunter gear from Bungie.";
+}
+loadHunter();
+</script></body></html>
