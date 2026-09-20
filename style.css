@@ -250,3 +250,15 @@ linear-gradient(90deg,#090b0f 0%,#080b10 23%,#08101a 44%,#101014 67%,#090b0f 100
 .activity-stats small{font-size:8px;letter-spacing:.15em;color:#68717d;font-weight:800}
 .activity-stats strong{font:700 15px Orbitron,sans-serif;margin-top:5px}
 @media(max-width:1050px){.activity-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.activity-grid{grid-template-columns:1fr}.activity-stats{grid-template-columns:repeat(2,1fr);row-gap:16px}}
+
+
+/* Destiny endgame completion counters */
+.endgame-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.endgame-card{min-height:165px;border:1px solid #252b34;background:linear-gradient(145deg,#10151c,#0c0f14);padding:25px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+.endgame-card:before{content:"";position:absolute;left:0;top:0;width:46px;height:2px;background:#f04b35}
+.endgame-card span{font-size:9px;letter-spacing:.18em;color:#68717d;font-weight:800}
+.endgame-card strong{font:800 clamp(30px,3vw,48px) Orbitron,sans-serif;margin:8px 0 3px;color:#f4f6f8}
+.endgame-card small{color:#727b87;font-size:11px}
+.endgame-card:last-child strong{color:#0b3d91}
+@media(max-width:1050px){.endgame-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.endgame-grid{grid-template-columns:1fr}}
