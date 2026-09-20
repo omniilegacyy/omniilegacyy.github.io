@@ -41,7 +41,7 @@
 </section>
 
 <section class="section destiny-characters">
-  <div class="section-head"><div><p class="eyebrow">CHARACTERS</p><h2>My Guardians.</h2></div><p>Character cards are prepared for Bungie's live character data.</p></div>
+  <div class="section-head"><div><p class="eyebrow">CHARACTERS</p><h2>My Guardians.</h2></div><p>Live character data, Power, playtime, and last activity direct from Bungie.</p></div>
   <div class="grid three" id="character-grid">
     <article class="character-card"><p class="tag">GUARDIAN</p><h3>Warlock</h3><div class="power">POWER <strong>—</strong></div><p>Live character data pending.</p></article>
     <article class="character-card"><p class="tag">GUARDIAN</p><h3>Titan</h3><div class="power">POWER <strong>—</strong></div><p>Live character data pending.</p></article>
@@ -51,7 +51,7 @@
 
 <section class="section destiny-activity">
   <div class="section-head"><div><p class="eyebrow">RECENT ACTIVITY</p><h2>Eyes up, Guardian.</h2></div><p>This area is ready for recent activities and additional Bungie API stats.</p></div>
-  <div class="api-placeholder"><span>SECURE API ENDPOINT</span><strong>READY FOR CONNECTION</strong><p>No Bungie API key is stored in this public GitHub Pages repository.</p></div>
+  <div id="activity-grid" class="activity-grid"><div class="api-placeholder"><span>LIVE ACTIVITY FEED</span><strong>LOADING...</strong><p>Retrieving recent Guardian activity from Bungie.</p></div></div>
 </section>
 </main>
 <footer><div class="logo">GAME<span>&</span>GARAGE</div><p>Omnii Legacyy#6405 • Destiny 2</p></footer>
@@ -59,7 +59,15 @@
 <script>
 const DESTINY_API = "https://shabas-world-destiny-api.shabalondon0z.workers.dev/guardian";
 const DESTINY_STATS_API = "https://shabas-world-destiny-api.shabalondon0z.workers.dev/stats";
+const DESTINY_ACTIVITIES_API = "https://shabas-world-destiny-api.shabalondon0z.workers.dev/activities";
 const CLASS_NAMES = { 0: "Titan", 1: "Hunter", 2: "Warlock", 3: "Unknown" };
+
+function formatDuration(seconds) {
+  const total = Number(seconds || 0);
+  const mins = Math.floor(total / 60);
+  const secs = Math.floor(total % 60);
+  return `${mins}m ${String(secs).padStart(2,"0")}s`;
+}
 
 function formatMinutes(minutes) {
   const hours = Math.floor(Number(minutes || 0) / 60);
@@ -106,11 +114,45 @@ async function loadGuardian() {
     }).join("");
 
     status.textContent = "Live Bungie data connected • Updated when this page loads";
-    document.querySelector(".api-placeholder strong").textContent = "BUNGIE API CONNECTED";
-    document.querySelector(".api-placeholder p").textContent = "Live Guardian profile and character data are flowing through the secure Cloudflare endpoint.";
+    await loadActivities();
   } catch (error) {
     status.textContent = "Guardian data is temporarily unavailable.";
     console.error("Destiny API:", error);
+  }
+}
+
+async function loadActivities() {
+  const grid = document.getElementById("activity-grid");
+  try {
+    const response = await fetch(DESTINY_ACTIVITIES_API);
+    if (!response.ok) throw new Error("Activities API returned " + response.status);
+    const data = await response.json();
+    if (data.status !== "online") throw new Error(data.message || "Activity data unavailable");
+    const activities = data.activities || [];
+    if (!activities.length) {
+      grid.innerHTML = `<div class="api-placeholder"><span>LIVE ACTIVITY FEED</span><strong>NO RECENT ACTIVITY</strong><p>Bungie returned no recent activities.</p></div>`;
+      return;
+    }
+    grid.innerHTML = activities.map((a,index) => {
+      const date = a.period ? new Date(a.period).toLocaleString(undefined,{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit"}) : "Unknown";
+      const kd = Number(a.kd);
+      const complete = Number(a.completed) === 1;
+      const type = (a.modes || []).includes(5) ? "CRUCIBLE" : (a.mode === 6 ? "PATROL" : "PVE");
+      return `<article class="activity-card ${index === 0 ? "latest" : ""}">
+        <div class="activity-top"><span>${type}</span><b>${complete ? "COMPLETED" : "INCOMPLETE"}</b></div>
+        <h3>${a.className || "Guardian"}</h3>
+        <p class="activity-date">${date}</p>
+        <div class="activity-stats">
+          <div><small>KILLS</small><strong>${Number(a.kills || 0).toLocaleString()}</strong></div>
+          <div><small>DEATHS</small><strong>${Number(a.deaths || 0).toLocaleString()}</strong></div>
+          <div><small>K/D</small><strong>${Number.isFinite(kd) ? kd.toFixed(2) : "—"}</strong></div>
+          <div><small>TIME</small><strong>${formatDuration(a.durationSeconds)}</strong></div>
+        </div>
+      </article>`;
+    }).join("");
+  } catch (error) {
+    grid.innerHTML = `<div class="api-placeholder"><span>LIVE ACTIVITY FEED</span><strong>ACTIVITY UNAVAILABLE</strong><p>The Guardian feed could not be loaded right now.</p></div>`;
+    console.error("Destiny activities:", error);
   }
 }
 loadGuardian();
