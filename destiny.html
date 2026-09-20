@@ -51,7 +51,13 @@
 
 <section class="section destiny-activity">
   <div class="section-head"><div><p class="eyebrow">RECENT ACTIVITY</p><h2>Eyes up, Guardian.</h2></div><p>This area is ready for recent activities and additional Bungie API stats.</p></div>
-  <div id="endgame-grid" class="endgame-grid">\n    <article class="endgame-card"><span>DUNGEONS COMPLETED</span><strong id="dungeons-completed">—</strong><small>Lifetime clears</small></article>\n    <article class="endgame-card"><span>RAIDS COMPLETED</span><strong id="raids-completed">—</strong><small>Lifetime clears</small></article>\n    <article class="endgame-card"><span>GRANDMASTERS COMPLETED</span><strong id="grandmasters-completed">—</strong><small>Grandmaster Conquests</small></article>\n    <article class="endgame-card"><span>CONQUEST COMPLETED</span><strong id="conquest-completed">—</strong><small>Ultimate Conquests</small></article>\n  </div>\n  <div id="activity-grid" class="activity-grid"><div class="api-placeholder"><span>LIVE ACTIVITY FEED</span><strong>LOADING...</strong><p>Retrieving recent Guardian activity from Bungie.</p></div></div>
+  <div id="endgame-grid" class="endgame-grid">
+    <article class="endgame-card"><span>DUNGEONS COMPLETED</span><strong id="dungeons-completed">—</strong><small>Lifetime clears</small></article>
+    <article class="endgame-card"><span>RAIDS COMPLETED</span><strong id="raids-completed">—</strong><small>Lifetime clears</small></article>
+    <article class="endgame-card"><span>GRANDMASTERS COMPLETED</span><strong id="grandmasters-completed">—</strong><small>Grandmaster Conquests</small></article>
+    <article class="endgame-card"><span>CONQUEST COMPLETED</span><strong id="conquest-completed">—</strong><small>Ultimate Conquests</small></article>
+  </div>
+  <div id="activity-grid" class="activity-grid"><div class="api-placeholder"><span>LIVE ACTIVITY FEED</span><strong>LOADING...</strong><p>Retrieving recent Guardian activity from Bungie.</p></div></div>
 </section>
 </main>
 <footer><div class="logo">GAME<span>&</span>GARAGE</div><p>Omnii Legacyy#6405 • Destiny 2</p></footer>
@@ -59,7 +65,8 @@
 <script>
 const DESTINY_API = "https://shabas-world-destiny-api.shabalondon0z.workers.dev/guardian";
 const DESTINY_STATS_API = "https://shabas-world-destiny-api.shabalondon0z.workers.dev/stats";
-const DESTINY_ACTIVITIES_API = "https://shabas-world-destiny-api.shabalondon0z.workers.dev/activities";\nconst DESTINY_ENDGAME_API = "https://shabas-world-destiny-api.shabalondon0z.workers.dev/endgame";
+const DESTINY_ACTIVITIES_API = "https://shabas-world-destiny-api.shabalondon0z.workers.dev/activities";
+const DESTINY_ENDGAME_API = "https://shabas-world-destiny-api.shabalondon0z.workers.dev/endgame";
 const CLASS_NAMES = { 0: "Titan", 1: "Hunter", 2: "Warlock", 3: "Unknown" };
 
 function formatDuration(seconds) {
