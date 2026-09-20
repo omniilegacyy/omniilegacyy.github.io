@@ -232,3 +232,21 @@ linear-gradient(90deg,#090b0f 0%,#080b10 23%,#08101a 44%,#101014 67%,#090b0f 100
 .character-card{border:1px solid #252b34;background:linear-gradient(145deg,#10151c,#0c0f14);padding:30px;min-height:260px}.character-card h3{font:700 30px Orbitron,sans-serif;margin:12px 0 35px}.character-card>p:last-child{color:#727b87}.power{border-top:1px solid #252b34;padding-top:18px;color:#68717d;font-size:11px;letter-spacing:.15em}.power strong{float:right;color:#f04b35;font:700 20px Orbitron,sans-serif}
 .destiny-activity{background:#0b0e12}.api-placeholder{border:1px solid #252b34;background:#0e1116;padding:45px;display:flex;flex-direction:column;align-items:flex-start}.api-placeholder span{font-size:10px;letter-spacing:.22em;color:#68717d;font-weight:800}.api-placeholder strong{font:700 clamp(24px,3vw,42px) Orbitron,sans-serif;margin:10px 0;color:#0b3d91}.api-placeholder p{color:#7f8997;margin:0}
 @media(max-width:800px){.destiny-hero{grid-template-columns:1fr;padding:120px 7vw 70px}.guardian-mark{display:none}.guardian-grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.guardian-grid{grid-template-columns:1fr}}
+
+
+/* Live Destiny recent activity feed */
+.activity-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.activity-grid .api-placeholder{grid-column:1/-1}
+.activity-card{border:1px solid #252b34;background:linear-gradient(145deg,#10151c,#0c0f14);padding:26px;min-height:225px;transition:.22s ease}
+.activity-card:hover{transform:translateY(-3px);border-color:#414a57}
+.activity-card.latest{border-top:2px solid #f04b35}
+.activity-top{display:flex;justify-content:space-between;gap:16px;align-items:center}
+.activity-top span{font-size:10px;letter-spacing:.22em;color:#f04b35;font-weight:800}
+.activity-top b{font-size:9px;letter-spacing:.14em;color:#68717d}
+.activity-card h3{font:700 25px Orbitron,sans-serif;margin:17px 0 3px}
+.activity-date{color:#727b87;font-size:12px;margin:0 0 25px}
+.activity-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;border-top:1px solid #252b34;padding-top:18px}
+.activity-stats div{display:flex;flex-direction:column}
+.activity-stats small{font-size:8px;letter-spacing:.15em;color:#68717d;font-weight:800}
+.activity-stats strong{font:700 15px Orbitron,sans-serif;margin-top:5px}
+@media(max-width:1050px){.activity-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.activity-grid{grid-template-columns:1fr}.activity-stats{grid-template-columns:repeat(2,1fr);row-gap:16px}}
