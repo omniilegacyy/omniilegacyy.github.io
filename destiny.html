@@ -121,10 +121,36 @@ async function loadGuardian() {
     }).join("");
 
     status.textContent = "Live Bungie data connected • Updated when this page loads";
-    await loadActivities();
+    await Promise.all([loadEndgame(), loadActivities()]);
   } catch (error) {
     status.textContent = "Guardian data is temporarily unavailable.";
     console.error("Destiny API:", error);
+  }
+}
+
+async function loadEndgame() {
+  try {
+    const response = await fetch(DESTINY_ENDGAME_API);
+    if (!response.ok) throw new Error("Endgame API returned " + response.status);
+
+    const data = await response.json();
+    if (data.status !== "online") {
+      throw new Error(data.message || "Endgame data unavailable");
+    }
+
+    const setValue = (id, value) => {
+      document.getElementById(id).textContent =
+        value === null || value === undefined
+          ? "—"
+          : Number(value).toLocaleString();
+    };
+
+    setValue("dungeons-completed", data.dungeons);
+    setValue("raids-completed", data.raids);
+    setValue("grandmasters-completed", data.grandmasters);
+    setValue("conquest-completed", data.conquest);
+  } catch (error) {
+    console.error("Destiny endgame:", error);
   }
 }
 
