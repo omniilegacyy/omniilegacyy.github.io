@@ -210,3 +210,15 @@ linear-gradient(90deg,#090b0f 0%,#080b10 23%,#08101a 44%,#101014 67%,#090b0f 100
 .omnii-mark{color:inherit!important;letter-spacing:.04em}
 .omnii-mark span{color:#f04b35}
 .omnii-mark b{color:#0b3d91;font-weight:800}
+
+
+/* Gaming PC project page */
+.pc-project-page,.pc-project-page main{background:#080a0d}
+.pc-project-hero{min-height:68vh;padding:9vw 10vw 6vw;display:flex;align-items:center;background:#080a0d}
+.pc-project-hero>div{max-width:850px}.pc-project-hero h1{font:800 clamp(54px,8vw,120px)/.92 Orbitron,sans-serif;letter-spacing:-.06em;margin:18px 0 28px}.pc-project-hero h1 span{color:#0b3d91}
+.pc-spec-section{background:#0b0e12}.pc-spec-list{border:1px solid #252b34}
+.pc-spec{min-height:132px;display:grid;grid-template-columns:70px 1fr 120px;align-items:center;gap:25px;padding:24px 32px;border-bottom:1px solid #252b34;background:#0e1116;transition:.2s}.pc-spec:last-child{border-bottom:0}.pc-spec:hover{background:#11161d;padding-left:40px}
+.pc-spec.hero-spec{border-left:3px solid #f04b35;background:linear-gradient(90deg,rgba(240,75,53,.07),#0e1116 28%)}
+.spec-rank{font:700 15px Orbitron,sans-serif;color:#4c5664}.pc-spec small{font-size:10px;letter-spacing:.22em;color:#f04b35;font-weight:800}.pc-spec h3{font:700 clamp(18px,2vw,28px) Orbitron,sans-serif;margin:6px 0}.pc-spec p{margin:0;color:#7f8997}.pc-spec>b{justify-self:end;font:700 10px Orbitron,sans-serif;letter-spacing:.16em;color:#0b3d91}
+.pc-build-grid{position:relative}.pc-build-link{grid-column:2;display:block;margin-top:-2px;color:#f04b35;font-weight:800;font-size:14px}
+@media(max-width:800px){.pc-project-hero{padding:120px 7vw 70px}.pc-spec{grid-template-columns:42px 1fr;padding:20px}.pc-spec>b{display:none}.pc-build-link{grid-column:1}}
