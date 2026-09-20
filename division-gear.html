@@ -26,4 +26,27 @@
 <article id="omnii-backpack"><div class="gear-slot">BACKPACK / EXOTIC</div><h3>NinjaBike Messenger Backpack</h3><strong>+15.0% Weapon Damage</strong><p>+154,660 Armor</p><p>Skill Tier +1</p><p>+5.9% Critical Hit Chance</p><p class="gear-talent">Resourceful</p></article>
 <article id="omnii-gloves"><div class="gear-slot">GLOVES / GEAR SET</div><h3>Steelwork Gloves</h3><strong>Skill Tier +1</strong><p>+16,295 Health</p><p>+4.6% Critical Hit Chance</p></article>
 <article id="omnii-knees"><div class="gear-slot">KNEEPADS / GEAR SET</div><h3>Hammer Guards</h3><strong>Skill Tier +1</strong><p>+5.9% Critical Hit Chance</p></article></div>
-</section></main><footer><div class="logo">GAME<span>&</span>GARAGE</div><p>DIVISION 2 • Gear Details</p></footer></body></html>
+</section>
+<script>
+(function(){
+  function focusSelectedGear(){
+    const id = window.location.hash.slice(1);
+    if(!id) return;
+    const selected = document.getElementById(id);
+    if(!selected) return;
+    document.querySelectorAll('.gear-stat-grid article').forEach(card => {
+      card.style.display = card === selected ? '' : 'none';
+    });
+    document.querySelectorAll('.gear-build-heading').forEach(h => h.style.display = 'none');
+    const head = document.querySelector('.division-gear .section-head');
+    if(head){
+      const title = selected.querySelector('h3')?.textContent || 'Gear Details';
+      head.innerHTML = '<div><p class="eyebrow">DIVISION 2 / GEAR DETAILS</p><h2>' + title + '.</h2></div><p>Recorded stats for this gear piece.</p>';
+    }
+    selected.scrollIntoView({block:'start'});
+  }
+  window.addEventListener('DOMContentLoaded', focusSelectedGear);
+  window.addEventListener('hashchange', focusSelectedGear);
+})();
+</script>
+</main><footer><div class="logo">GAME<span>&</span>GARAGE</div><p>DIVISION 2 • Gear Details</p></footer></body></html>
