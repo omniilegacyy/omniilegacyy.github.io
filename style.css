@@ -204,3 +204,9 @@ linear-gradient(90deg,#090b0f 0%,#080b10 23%,#08101a 44%,#101014 67%,#090b0f 100
 .portal-lines span:nth-child(3){width:18%;right:14%;top:24%;background:#0b3d91;opacity:.35;transform:rotate(90deg)}
 .project-portal .car-silhouette,.project-portal .wheel,.project-portal .visual-text{display:none!important}
 @media(max-width:800px){.car-visual.project-portal{min-height:320px}.project-portal .portal-copy{width:80%}}
+
+
+/* OmniiLegacyy two-tone signature */
+.omnii-mark{color:inherit!important;letter-spacing:.04em}
+.omnii-mark span{color:#f04b35}
+.omnii-mark b{color:#0b3d91;font-weight:800}
