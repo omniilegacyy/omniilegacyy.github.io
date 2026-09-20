@@ -58,6 +58,7 @@
 <script src="script.js"></script>
 <script>
 const DESTINY_API = "https://shabas-world-destiny-api.shabalondon0z.workers.dev/guardian";
+const DESTINY_STATS_API = "https://shabas-world-destiny-api.shabalondon0z.workers.dev/stats";
 const CLASS_NAMES = { 0: "Titan", 1: "Hunter", 2: "Warlock", 3: "Unknown" };
 
 function formatMinutes(minutes) {
@@ -74,11 +75,23 @@ async function loadGuardian() {
     const data = await response.json();
     if (data.status !== "online") throw new Error(data.message || "Guardian data unavailable");
 
+    const statsResponse = await fetch(DESTINY_STATS_API);
+    if (!statsResponse.ok) throw new Error("Stats API returned " + statsResponse.status);
+    const stats = await statsResponse.json();
+    if (stats.status !== "online") throw new Error(stats.message || "Combat stats unavailable");
+
     document.getElementById("guardian-name").textContent = data.guardian.displayName || "Omnii Legacyy";
 
     const totalMinutes = (data.characters || []).reduce((sum, c) => sum + Number(c.minutesPlayedTotal || 0), 0);
     document.getElementById("time-played").textContent = formatMinutes(totalMinutes);
     document.querySelector("#time-played + small").textContent = "Across all Guardians";
+
+    document.getElementById("pve-kills").textContent = Number(stats.pve?.kills || 0).toLocaleString();
+    document.querySelector("#pve-kills + small").textContent = "Lifetime PvE kills";
+
+    const kd = Number(stats.crucible?.kd);
+    document.getElementById("crucible-kd").textContent = Number.isFinite(kd) ? kd.toFixed(2) : "—";
+    document.querySelector("#crucible-kd + small").textContent = "Lifetime Crucible K/D";
 
     const characters = [...(data.characters || [])].sort((a,b) => a.classType - b.classType);
     document.getElementById("character-grid").innerHTML = characters.map(c => {
