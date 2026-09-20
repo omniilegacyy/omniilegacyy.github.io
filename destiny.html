@@ -50,7 +50,7 @@
 </section>
 
 <section class="section destiny-activity">
-  <div class="section-head"><div><p class="eyebrow">RECENT ACTIVITY</p><h2>Eyes up, Guardian.</h2></div><p>This area is ready for recent activities and additional Bungie API stats.</p></div>
+  <div class="section-head"><div><p class="eyebrow">RECENT ACTIVITY</p><h2>Eyes up, Guardian.</h2></div><p>A quick look at your latest five activities and endgame milestones.</p></div>
   <div id="endgame-grid" class="endgame-grid">
     <article class="endgame-card"><span>DUNGEONS COMPLETED</span><strong id="dungeons-completed">—</strong><small>Lifetime clears</small></article>
     <article class="endgame-card"><span>RAIDS COMPLETED</span><strong id="raids-completed">—</strong><small>Lifetime clears</small></article>
@@ -161,26 +161,29 @@ async function loadActivities() {
     if (!response.ok) throw new Error("Activities API returned " + response.status);
     const data = await response.json();
     if (data.status !== "online") throw new Error(data.message || "Activity data unavailable");
-    const activities = data.activities || [];
+
+    const activities = (data.activities || []).slice(0, 5);
     if (!activities.length) {
       grid.innerHTML = `<div class="api-placeholder"><span>LIVE ACTIVITY FEED</span><strong>NO RECENT ACTIVITY</strong><p>Bungie returned no recent activities.</p></div>`;
       return;
     }
-    grid.innerHTML = activities.map((a,index) => {
-      const date = a.period ? new Date(a.period).toLocaleString(undefined,{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit"}) : "Unknown";
+
+    grid.innerHTML = activities.map((a, index) => {
+      const date = a.period
+        ? new Date(a.period).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })
+        : "Unknown";
       const kd = Number(a.kd);
-      const complete = Number(a.completed) === 1;
       const type = (a.modes || []).includes(5) ? "CRUCIBLE" : (a.mode === 6 ? "PATROL" : "PVE");
-      return `<article class="activity-card ${index === 0 ? "latest" : ""}">
-        <div class="activity-top"><span>${type}</span><b>${complete ? "COMPLETED" : "INCOMPLETE"}</b></div>
-        <h3>${a.className || "Guardian"}</h3>
-        <p class="activity-date">${date}</p>
-        <div class="activity-stats">
-          <div><small>KILLS</small><strong>${Number(a.kills || 0).toLocaleString()}</strong></div>
-          <div><small>DEATHS</small><strong>${Number(a.deaths || 0).toLocaleString()}</strong></div>
-          <div><small>K/D</small><strong>${Number.isFinite(kd) ? kd.toFixed(2) : "—"}</strong></div>
-          <div><small>TIME</small><strong>${formatDuration(a.durationSeconds)}</strong></div>
+
+      return `<article class="activity-row ${index === 0 ? "latest" : ""}">
+        <div class="activity-identity">
+          <span class="activity-type">${type}</span>
+          <strong>${a.className || "Guardian"}</strong>
+          <small>${date}</small>
         </div>
+        <div class="activity-metric"><small>KILLS</small><strong>${Number(a.kills || 0).toLocaleString()}</strong></div>
+        <div class="activity-metric"><small>K/D</small><strong>${Number.isFinite(kd) ? kd.toFixed(2) : "—"}</strong></div>
+        <div class="activity-metric"><small>TIME</small><strong>${formatDuration(a.durationSeconds)}</strong></div>
       </article>`;
     }).join("");
   } catch (error) {
