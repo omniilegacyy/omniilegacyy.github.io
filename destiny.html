@@ -69,6 +69,14 @@ const DESTINY_ACTIVITIES_API = "https://shabas-world-destiny-api.shabalondon0z.w
 const DESTINY_ENDGAME_API = "https://shabas-world-destiny-api.shabalondon0z.workers.dev/endgame";
 const CLASS_NAMES = { 0: "Titan", 1: "Hunter", 2: "Warlock", 3: "Unknown" };
 
+// Random Destiny hero artwork on every page visit.
+const DESTINY_HEROES = ["destin2-01.jpg", "destiny2-02.jpg", "destiny2-03.jpg", "destiny2-04.jpg"];
+const destinyHeroArt = document.querySelector(".destiny-hero-art");
+if (destinyHeroArt) {
+  const hero = DESTINY_HEROES[Math.floor(Math.random() * DESTINY_HEROES.length)];
+  destinyHeroArt.style.backgroundImage = `linear-gradient(90deg,#080a0d 0%,rgba(8,10,13,.92) 9%,rgba(8,10,13,.38) 28%,rgba(8,10,13,.05) 52%),url("${hero}")`;
+}
+
 function formatDuration(seconds) {
   const total = Number(seconds || 0);
   const mins = Math.floor(total / 60);
