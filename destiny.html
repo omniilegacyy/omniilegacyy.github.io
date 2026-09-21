@@ -114,7 +114,7 @@ async function loadGuardian() {
       const emblem = c.emblemBackgroundPath ? "https://www.bungie.net" + c.emblemBackgroundPath : "";
       return `<article class="character-card" style="${emblem ? `background-image:linear-gradient(rgba(8,10,13,.72),rgba(8,10,13,.94)),url('${emblem}');background-size:cover;background-position:center;` : ""}">
         <p class="tag">GUARDIAN</p>
-        <h3>${c.classType === 1 ? '<a class="guardian-loadout-link" href="hunter.html" target="_blank" rel="noopener noreferrer">Hunter</a>' : (CLASS_NAMES[c.classType] || "Guardian")}</h3>
+        <h3>${c.classType === 0 ? '<a class="guardian-loadout-link" href="titan.html" target="_blank" rel="noopener noreferrer">Titan</a>' : c.classType === 1 ? '<a class="guardian-loadout-link" href="hunter.html" target="_blank" rel="noopener noreferrer">Hunter</a>' : c.classType === 2 ? '<a class="guardian-loadout-link" href="warlock.html" target="_blank" rel="noopener noreferrer">Warlock</a>' : (CLASS_NAMES[c.classType] || "Guardian")}</h3>
         <div class="power">POWER <strong>${Number(c.power || 0).toLocaleString()}</strong></div>
         <p>${formatMinutes(c.minutesPlayedTotal)} played • Last active ${lastPlayed}</p>
       </article>`;
