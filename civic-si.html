@@ -13,10 +13,11 @@
 html,body.project-page,body.project-page main,body.project-page .civic-hero{background:#080a0d!important;background-image:none!important}
 body.project-page .civic-hero::before,body.project-page .civic-hero::after{content:none!important;display:none!important}
 body.project-page::before{display:none!important;content:none!important}
-.civic-hero{grid-template-columns:minmax(360px,.72fr) minmax(0,1.28fr)!important}
-.civic-hero-photo{display:flex;align-items:center;justify-content:center;overflow:visible;min-width:0}
-.civic-hero-photo img{width:min(100%,1380px);height:auto;max-height:none;object-fit:contain;object-position:center;display:block;filter:drop-shadow(0 22px 38px rgba(0,0,0,.42))}
-@media(max-width:900px){.civic-hero{grid-template-columns:1fr!important}.civic-hero-photo img{width:100%;max-width:100%;max-height:none}}
+.project-page .civic-hero{gap:4vw!important;padding-left:5vw!important;padding-right:4vw!important}
+.project-page .civic-hero-copy{flex:0 0 38%!important;max-width:650px!important}
+.project-page .civic-hero-photo{flex:1 1 58%!important;max-width:none!important;width:auto!important;display:flex;align-items:center;justify-content:center;overflow:visible;min-width:0}
+.project-page .civic-hero-photo img{width:100%!important;max-width:none!important;height:auto!important;max-height:none!important;object-fit:contain;object-position:center;display:block;filter:drop-shadow(0 22px 38px rgba(0,0,0,.42))}
+@media(max-width:900px){.project-page .civic-hero{padding:120px 7vw 70px!important}.project-page .civic-hero-copy{flex:auto!important;max-width:760px!important}.project-page .civic-hero-photo{width:100%!important;max-width:none!important}.project-page .civic-hero-photo img{width:100%!important;max-width:100%!important}}
 </style>
 </head>
 <body class="project-page">
