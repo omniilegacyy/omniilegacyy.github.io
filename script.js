@@ -27,8 +27,8 @@ if(landingHero){
   else if(month>=6&&month<=8) season='summer';
 
   const seasonalBackgrounds={
-    fall:['fall-01.jpg','fall-02.jpg','fall-03.jpg','fall-04.jpg'],
-    winter:['winter-01.webp','winter-02.jpg','winter-03.jpg','winter-04.jpg','winter-05.jpg'],
+    fall:['images/seasonal/fall-01.jpg','images/seasonal/fall-02.jpg','images/seasonal/fall-03.jpg','images/seasonal/fall-04.jpg'],
+    winter:['images/seasonal/winter-01.webp','images/seasonal/winter-02.jpg','images/seasonal/winter-03.jpg','images/seasonal/winter-04.jpg','images/seasonal/winter-05.jpg'],
     spring:[],
     summer:[]
   };
