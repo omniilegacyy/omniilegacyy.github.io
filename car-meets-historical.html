@@ -31,6 +31,17 @@ html,body.meets-page,body.meets-page main{background:#080a0d!important;backgroun
 .meet-card:first-child .slot{border-color:rgba(255,122,0,.22)}
 @media(max-width:900px){.gallery{grid-template-columns:repeat(2,1fr)}.meets-hero{padding:130px 7vw 55px}.meet-head{align-items:flex-start;flex-direction:column}}
 @media(max-width:520px){.gallery{grid-template-columns:1fr}.meet-card{padding:20px}}
+.slot.photo{cursor:zoom-in}
+.lightbox{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.94);padding:30px}
+.lightbox.open{display:flex}
+.lightbox img{max-width:min(94vw,1600px);max-height:90vh;object-fit:contain;border-radius:8px;box-shadow:0 25px 80px rgba(0,0,0,.65)}
+.lightbox-btn{position:absolute;border:0;background:rgba(15,17,21,.72);color:#fff;cursor:pointer;width:52px;height:52px;border-radius:50%;font-size:28px;display:grid;place-items:center;backdrop-filter:blur(6px)}
+.lightbox-btn:hover{background:#ff7a00}
+.lightbox-close{top:22px;right:24px;font-size:25px}
+.lightbox-prev{left:24px;top:50%;transform:translateY(-50%)}
+.lightbox-next{right:24px;top:50%;transform:translateY(-50%)}
+.lightbox-count{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:#c7cbd1;font:600 .8rem Inter,sans-serif;letter-spacing:.12em}
+@media(max-width:650px){.lightbox{padding:18px}.lightbox-prev{left:10px}.lightbox-next{right:10px}.lightbox-close{right:12px;top:12px}.lightbox-btn{width:44px;height:44px}}
 </style>
 </head>
 <body class="meets-page">
@@ -71,6 +82,47 @@ html,body.meets-page,body.meets-page main{background:#080a0d!important;backgroun
 </section>
 </div>
 </main>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Car Meet photo viewer">
+  <button class="lightbox-btn lightbox-close" type="button" aria-label="Close photo viewer">×</button>
+  <button class="lightbox-btn lightbox-prev" type="button" aria-label="Previous photo">‹</button>
+  <img id="lightbox-image" src="" alt="">
+  <button class="lightbox-btn lightbox-next" type="button" aria-label="Next photo">›</button>
+  <div class="lightbox-count" id="lightbox-count"></div>
+</div>
 <footer><div class="logo">GAME<span>&</span>GARAGE</div><p>Built for fun. No ads. No clutter.</p></footer>
 <script src="script.js"></script>
+<script>
+(() => {
+  const photos = [...document.querySelectorAll('#car-meet-1 .slot.photo img')];
+  const box = document.getElementById('lightbox');
+  const image = document.getElementById('lightbox-image');
+  const count = document.getElementById('lightbox-count');
+  let current = 0;
+  function show(i) {
+    current = (i + photos.length) % photos.length;
+    image.src = photos[current].src;
+    image.alt = photos[current].alt;
+    count.textContent = (current + 1) + ' / ' + photos.length;
+  }
+  function open(i) { show(i); box.classList.add('open'); document.body.style.overflow='hidden'; }
+  function close() { box.classList.remove('open'); document.body.style.overflow=''; image.src=''; }
+  photos.forEach((photo,i) => {
+    photo.parentElement.setAttribute('tabindex','0');
+    photo.parentElement.setAttribute('role','button');
+    photo.parentElement.setAttribute('aria-label','Open ' + photo.alt);
+    photo.parentElement.addEventListener('click', () => open(i));
+    photo.parentElement.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') { e.preventDefault(); open(i); } });
+  });
+  box.querySelector('.lightbox-close').addEventListener('click', close);
+  box.querySelector('.lightbox-prev').addEventListener('click', () => show(current-1));
+  box.querySelector('.lightbox-next').addEventListener('click', () => show(current+1));
+  box.addEventListener('click', e => { if(e.target===box) close(); });
+  document.addEventListener('keydown', e => {
+    if(!box.classList.contains('open')) return;
+    if(e.key==='Escape') close();
+    if(e.key==='ArrowLeft') show(current-1);
+    if(e.key==='ArrowRight') show(current+1);
+  });
+})();
+</script>
 </body></html>
